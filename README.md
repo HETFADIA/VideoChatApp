@@ -1,1 +1,2 @@
 # clone
+npm run dev
