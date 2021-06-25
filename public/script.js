@@ -9,12 +9,12 @@ navigator.mediaDevices.getUserMedia({
     audio:true
 }).then(stream=>{
     myVideoStream=stream;
-    addVideoStream(myVideo,)
+    addVideoStream(myVideo,stream)
 })
 
 const addVideoStream=(video,stream)=>{
     video.srcObject=stream;
-    video.addEventListener('loadmetadata',()=>{
+    video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
     videoGrid.append(video)
