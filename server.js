@@ -17,10 +17,10 @@ app.get('/:room',(req,res)=>{
     res.render('room',{roomId:req.params.room})
 })
 io.on('connection',socket=>{
-    socket.on('join-room',(roomId)=>{
+    socket.on('join-room',(roomId,userId)=>{
 
         socket.join(roomId);
-        socket.to(roomId).emit('user-connected');
+        socket.to(roomId).emit('user-connected',userId);
     })
 })
 server.listen(3030)
