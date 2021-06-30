@@ -1,5 +1,6 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
+let usersCount=0
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
@@ -18,11 +19,12 @@ navigator.mediaDevices.getUserMedia({
   
 
   socket.on('user-connected', userId => {
+
     connectToNewUser(userId, stream)
   })
-  // input value
+
   let text = $("input");
-  // when press enter send message
+
   $('html').keydown(function (e) {
     if (e.which == 13 && text.val().length !== 0) {
       socket.emit('message', text.val());
@@ -58,16 +60,29 @@ myPeer.on('open', id => {
 function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
+  
   call.on('stream', userVideoStream => {
+
     addVideoStream(video, userVideoStream)
   })
   call.on('close', () => {
+
     video.remove()
+    usersCount=document.getElementById("video-grid").childElementCount;
+  scrollVideos(usersCount);
   })
 
   peers[userId] = call
 }
+function scrollVideos(number){
 
+  if(number>4){
+    document.getElementsByClassName("main__videos")[0].style.overflowY="scroll";
+  }
+  else{
+    document.getElementsByClassName("main__videos")[0].style.overflowY="hidden";
+  }
+}
 function addVideoStream(video, stream) {
   video.srcObject = stream
   video.addEventListener('loadedmetadata', () => {
@@ -75,7 +90,9 @@ function addVideoStream(video, stream) {
   })
   
   videoGrid.append(video)
-  
+  usersCount=document.getElementById("video-grid").childElementCount;
+  scrollVideos(usersCount);
+
   
 }
 
