@@ -5,7 +5,7 @@ let usersCount=0
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '3030'
+  port: '443' //443 for deploy 3030 for local
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
