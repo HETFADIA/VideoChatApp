@@ -1,0 +1,6 @@
+git add .
+git commit -m "text"
+git push origin main
+git push heroku main
+heroku ps:scale web=1
+heroku open
