@@ -1,3 +1,4 @@
+let username="Anon"
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 let usersCount=0
@@ -27,12 +28,14 @@ navigator.mediaDevices.getUserMedia({
 
   $('html').keydown(function (e) {
     if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
+      socket.emit('message', text.val(),username);
       text.val('')
     }
   });
-  socket.on("createMessage", message => {
-    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+  socket.on("createMessage", (message,username) => {
+    var currTime=currentTime();
+    console.log(currTime)
+    $("ul").append(`<li class="message"><b>${username}</b> ${currTime}<br/>${message}</li>`);
     scrollToBottom()
   })
 })
@@ -157,4 +160,23 @@ const setPlayVideo = () => {
     <span>Play Video</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
+}
+
+function currentTime(){
+  var today = new Date();
+  var hrs=today.getHours();
+  var min=today.getMinutes();
+  var delay=" AM"
+
+  if(hrs>12){
+      hrs-=12
+      delay=" PM"
+  }
+  if(hrs<10){
+      hrs='0'+hrs;
+  }
+  if(min<10){
+      min='0'+min;
+  }
+  return hrs+":"+min+delay;
 }
