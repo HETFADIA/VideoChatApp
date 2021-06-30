@@ -115,3 +115,6 @@
     object-fit: cover;
     padding: 8px;
  }
+ #login{
+     display:none;
+ }
