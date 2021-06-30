@@ -180,3 +180,8 @@ function currentTime(){
   }
   return hrs+":"+min+delay;
 }
+function EnterMeet(){
+  document.body.style.backgroundColor="white";
+  document.getElementById("login").style.display="none"
+  document.getElementById("meet").style.display="block"
+}
