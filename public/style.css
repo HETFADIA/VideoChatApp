@@ -59,7 +59,7 @@ body{
 }
 
 .main__controls__button:hover {
-    background-color: #343434;
+    background-color: #6e4545;
     border-radius: 5px;
 }
 
@@ -155,7 +155,7 @@ body{
 }
 .veryBigText{
     font-size: larger;
-
+    font-weight: bolder;
 }
 #centered{
     text-align: center;
