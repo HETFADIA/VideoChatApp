@@ -160,3 +160,6 @@ body{
 #centered{
     text-align: center;
 }
+#copyURL{
+    display:none;
+}

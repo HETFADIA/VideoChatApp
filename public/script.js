@@ -268,3 +268,20 @@ function showUsers(){
       document.getElementById("main_right").style.flex=0
     }
 }
+
+
+
+const copyToClipboard = str => {
+  //https://www.30secondsofcode.org/articles/s/copy-text-to-clipboard-with-javascript
+  const el = document.createElement('textarea');
+  el.value = str;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+};
+function copyURL(){
+    console.log(window.location.href,"successfully copied")
+    copyToClipboard(window.location.href)
+
+}
