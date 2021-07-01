@@ -39,6 +39,14 @@ navigator.mediaDevices.getUserMedia({
     scrollToBottom()
   })
 })
+let name_input=$("#username");
+$('html').keydown(function (e) {
+  if (e.which == 13 && name_input.val().length !== 0) {
+    console.log(name_input);
+    // socket.emit('message', text.val(),username);
+    // text.val('')
+  }
+});
 var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 myPeer.on('call', function(call){
   getUserMedia({video: true, audio: true}, function(stream){
