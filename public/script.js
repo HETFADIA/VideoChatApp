@@ -42,8 +42,11 @@ navigator.mediaDevices.getUserMedia({
 let name_input=$("#username");
 $('html').keydown(function (e) {
   if (e.which == 13 && name_input.val().length !== 0) {
-    username=name_input;
-    console.log(name_input.val());
+    username=name_input.val().trim();
+    if(username.length>27){
+      username=username.slice(0,27)
+    }
+    console.log(username);
     // socket.emit('message', text.val(),username);
     // text.val('')
     EnterMeet()
