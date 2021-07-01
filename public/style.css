@@ -18,7 +18,7 @@ body{
 
 .main__videos {
     flex-grow: 1;
-    background-color: black;
+    background-color: rgb(34, 36, 36);
     display: flex;
     justify-content: center;
     align-items: center;
