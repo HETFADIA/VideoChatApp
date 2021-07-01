@@ -72,7 +72,9 @@ myPeer.on('call', function(call){
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
-
+socket.on('userlist',users=>{
+    console.log("userlist reached script",users);
+})
 myPeer.on('open', id => {
   socket.emit('join-room', ROOM_ID, id)
 })

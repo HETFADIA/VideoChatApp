@@ -11,30 +11,42 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
+    res.redirect(`/${uuidV4()}`)
 })
 
 app.get('/:room', (req, res) => {
-  res.render('room', { roomId: req.params.room })
+    res.render('room', { roomId: req.params.room })
 })
 
 var users=[];
-var usersdict={}
+var usersdict=new Map()
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
         socket.join(roomId)
         socket.to(roomId).emit('user-connected', userId);
         
         socket.on('message', (message,username) => {
-          io.to(roomId).emit('createMessage', message,username)
+            io.to(roomId).emit('createMessage', message,username)
         }); 
 
         socket.on('add-Username',username=>{
-          console.log("reached to server.js",username)
+            console.log("reached to server.js",username)
+            if(usersdict.has(roomId)){
+                console.log("old user")
+                users=usersdict.get(roomId)
+                users.push(username)
+            }
+            else{
+                console.log("new user");
+                users=[username]
+            }
+            usersdict.set(roomId, users);
+            console.log(users)
+            io.to(roomId).emit('userlist',users);
         })
 
         socket.on('disconnect', () => {
-          socket.to(roomId).emit('user-disconnected', userId)
+            socket.to(roomId).emit('user-disconnected', userId)
         })
 
     })
