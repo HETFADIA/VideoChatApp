@@ -5,7 +5,7 @@ let usersCount=0
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443' //443 for deploy 3030 for local
+  port: '3030' //443 for deploy 3030 for local
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -191,4 +191,8 @@ function close_window() {
   if (confirm("Close Window?")) {
     close();
   }
+}
+function hidechat(){
+
+  console.log("hi")
 }
