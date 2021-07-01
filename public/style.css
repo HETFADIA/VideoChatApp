@@ -115,6 +115,25 @@
     object-fit: cover;
     padding: 8px;
  }
+ #login {
+    
+    width: 400px;
+	height: 200px;
+	
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+}
  #meet{
      display:none;
  }
+ #login-name{
+    text-align: center;
+}
+ .bigText{
+    font-size:large;
+}
