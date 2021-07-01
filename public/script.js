@@ -41,16 +41,24 @@ navigator.mediaDevices.getUserMedia({
 })
 let name_input=$("#username");
 $('html').keydown(function (e) {
-  if (e.which == 13 && name_input.val().trim().length !== 0) {
-    username=name_input.val().trim();
-    if(username.length>27){
-      username=username.slice(0,27)
+  if (e.which == 13) {
+    if(name_input.val().trim().length !== 0){
+
+      username=name_input.val().trim();
+      if(username.length>27){
+        username=username.slice(0,27)
+      }
+      console.log(username);
+      addUserName(username)
+      EnterMeet()
     }
-    console.log(username);
-    addUserName(username)
-    EnterMeet()
+    else{
+      addUserName(username)
+      EnterMeet()
+    }
 
   }
+  
 });
 function addUserName(username){
   console.log("username received at script.js",username);
@@ -70,13 +78,19 @@ myPeer.on('call', function(call){
 })
 
 socket.on('user-disconnected', userId => {
+
   if (peers[userId]) peers[userId].close()
 })
 socket.on('userlist',users=>{
     console.log("userlist reached script",users);
     var string=""
+    var spaces=""
+    var spacestimes=6;
+    for(var i=0;i<spacestimes;i++){
+      spaces+="&nbsp;"
+    }
     for(var i=0;i<users.length;i++){
-      string+=users[i]+"</br>";
+      string+=spaces+users[i]+"</br>"+"<br>";
     }
     console.log(string)
     document.getElementById("userlist").innerHTML=string;
@@ -224,8 +238,8 @@ function hidechat(){
   if(ischat=="none"){
     document.getElementById("main_right").style.display="flex"
     document.getElementById("users").style.display="none"
-    document.getElementById("main__left").style.flex=0.8
     document.getElementById("users").style.flex=0
+    document.getElementById("main__left").style.flex=0.8
     document.getElementById("main_right").style.flex=0.2
     console.log("chat removed")
   }
@@ -243,9 +257,9 @@ function showUsers(){
     if(isUsers=="none"){
       document.getElementById("main_right").style.display="none"
       document.getElementById("users").style.display="flex"
+      document.getElementById("main_right").style.flex=0
       document.getElementById("main__left").style.flex=0.8
       document.getElementById("users").style.flex=0.2
-      document.getElementById("main_right").style.flex=0
     }
     else{
       document.getElementById("users").style.display="none"

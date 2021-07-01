@@ -85,12 +85,13 @@ body{
     flex-grow: 1;
     overflow-y: auto;
     background-color: white;
+    
 }
 #users{
     display: flex;
     flex-direction: column;
     overflow-y:auto ;
-    padding-left: 20px;
+    
     
 }
 .messages{
@@ -154,4 +155,6 @@ body{
     font-size: larger;
 
 }
-
+#centered{
+    text-align: center;
+}
