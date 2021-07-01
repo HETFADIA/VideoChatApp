@@ -1,3 +1,6 @@
+body{
+    background-color: aqua;
+}
 .main {
     height: 100vh;
     display: flex;
@@ -72,14 +75,20 @@
     color: #F5F5F5;
     text-align: center;
 }
-
+.white-background{
+    background-color: white;
+}
+.black-color{
+    color:black;
+}
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
+    background-color: white;
 }
 
 .messages{
-    color: white;
+    color: black;
     list-style: none;
 }
 
