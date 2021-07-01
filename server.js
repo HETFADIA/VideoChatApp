@@ -19,20 +19,24 @@ app.get('/:room', (req, res) => {
 })
 
 var users=[];
-
+var usersdict={}
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
         socket.join(roomId)
         socket.to(roomId).emit('user-connected', userId);
         
         socket.on('message', (message,username) => {
-          
           io.to(roomId).emit('createMessage', message,username)
-    }); 
+        }); 
+
+        socket.on('add-Username',username=>{
+          console.log("reached to server.js",username)
+        })
 
         socket.on('disconnect', () => {
           socket.to(roomId).emit('user-disconnected', userId)
         })
+
     })
 })
 

@@ -41,17 +41,21 @@ navigator.mediaDevices.getUserMedia({
 })
 let name_input=$("#username");
 $('html').keydown(function (e) {
-  if (e.which == 13 && name_input.val().length !== 0) {
+  if (e.which == 13 && name_input.val().trim().length !== 0) {
     username=name_input.val().trim();
     if(username.length>27){
       username=username.slice(0,27)
     }
     console.log(username);
-    // socket.emit('message', text.val(),username);
-    // text.val('')
+    addUserName(username)
     EnterMeet()
+
   }
 });
+function addUserName(username){
+  console.log("username received at script.js",username);
+  socket.emit('add-Username',username)
+}
 var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 myPeer.on('call', function(call){
   getUserMedia({video: true, audio: true}, function(stream){
