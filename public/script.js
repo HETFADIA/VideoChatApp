@@ -185,3 +185,10 @@ function EnterMeet(){
   document.getElementById("login").style.display="none"
   document.getElementById("meet").style.display="block"
 }
+
+
+function close_window() {
+  if (confirm("Close Window?")) {
+    close();
+  }
+}
