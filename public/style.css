@@ -86,7 +86,13 @@ body{
     overflow-y: auto;
     background-color: white;
 }
-
+#users{
+    display: flex;
+    flex-direction: column;
+    overflow-y:auto ;
+    padding-left: 20px;
+    
+}
 .messages{
     color: black;
     list-style: none;
@@ -144,3 +150,8 @@ body{
  .bigText{
     font-size:large;
 }
+.veryBigText{
+    font-size: larger;
+
+}
+

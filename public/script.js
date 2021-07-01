@@ -74,6 +74,12 @@ socket.on('user-disconnected', userId => {
 })
 socket.on('userlist',users=>{
     console.log("userlist reached script",users);
+    var string=""
+    for(var i=0;i<users.length;i++){
+      string+=users[i]+"</br>";
+    }
+    console.log(string)
+    document.getElementById("userlist").innerHTML=string;
 })
 myPeer.on('open', id => {
   socket.emit('join-room', ROOM_ID, id)
@@ -203,6 +209,7 @@ function EnterMeet(){
   document.body.style.backgroundColor="white";
   document.getElementById("login").style.display="none"
   document.getElementById("meet").style.display="block"
+  document.getElementById("users").style.display="none"
 }
 
 
@@ -215,15 +222,35 @@ function hidechat(){
   var ischat=document.getElementById("main_right").style.display
   console.log("hi")
   if(ischat=="none"){
-    document.getElementById("main__left").style.flex=0.8
     document.getElementById("main_right").style.display="flex"
+    document.getElementById("users").style.display="none"
+    document.getElementById("main__left").style.flex=0.8
+    document.getElementById("users").style.flex=0
+    document.getElementById("main_right").style.flex=0.2
     console.log("chat removed")
   }
   else{
 
     document.getElementById("main_right").style.display="none"
     document.getElementById("main__left").style.flex=1
+    document.getElementById("users").style.display="none"
     console.log("chat added")
   }
   
+}
+function showUsers(){
+    var isUsers=document.getElementById("users").style.display;
+    if(isUsers=="none"){
+      document.getElementById("main_right").style.display="none"
+      document.getElementById("users").style.display="flex"
+      document.getElementById("main__left").style.flex=0.8
+      document.getElementById("users").style.flex=0.2
+      document.getElementById("main_right").style.flex=0
+    }
+    else{
+      document.getElementById("users").style.display="none"
+      document.getElementById("main__left").style.flex=1
+      document.getElementById("users").style.flex=0
+      document.getElementById("main_right").style.flex=0
+    }
 }
