@@ -43,7 +43,7 @@
    <span id="meet">
 
       <div class="main">
-         <div class="main__left">
+         <div class="main__left" id="main__left">
             <div class="main__videos">
                <div id="video-grid">
                   
@@ -69,9 +69,9 @@
                      <i class="fas fa-user-friends"></i>
                      <span>Participants</span>
                   </div>
-                  <div class="main__controls__button">
+                  <div class="main__controls__button"  onclick="hidechat()">
                      <i class="fas fa-comment-alt"></i>
-                     <span onclick="hidechat()">Msgs</span>
+                     <span>Msgs</span>
                   </div>
                </div>
                <div class="main__controls__block">
@@ -95,7 +95,7 @@
             <div class="main__message_container white-background black-color">
                <input id="chat_message" type="text" placeholder="Type message here..." style="color:black">
             </div>
-      </div>
+         </div>
    </div>
 </span>
 </body>

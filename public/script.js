@@ -193,6 +193,18 @@ function close_window() {
   }
 }
 function hidechat(){
-
+  var ischat=document.getElementById("main_right").style.display
   console.log("hi")
+  if(ischat=="none"){
+    document.getElementById("main__left").style.flex=0.8
+    document.getElementById("main_right").style.display="flex"
+    console.log("chat removed")
+  }
+  else{
+
+    document.getElementById("main_right").style.display="none"
+    document.getElementById("main__left").style.flex=1
+    console.log("chat added")
+  }
+  
 }
