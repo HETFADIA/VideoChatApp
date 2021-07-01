@@ -42,9 +42,11 @@ navigator.mediaDevices.getUserMedia({
 let name_input=$("#username");
 $('html').keydown(function (e) {
   if (e.which == 13 && name_input.val().length !== 0) {
-    console.log(name_input);
+    username=name_input;
+    console.log(name_input.val());
     // socket.emit('message', text.val(),username);
     // text.val('')
+    EnterMeet()
   }
 });
 var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
