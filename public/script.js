@@ -2,12 +2,15 @@ let username="Anon"
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 let usersCount=0
+let people=[]
+let peopleCount=0
 const myPeer = new Peer(undefined, {
-  path: '/peerjs',
   host: '/',
+  path: '/peerjs',
   port: '3030' //443 for deploy 3030 for local
 })
 let myVideoStream;
+let conn;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 const peers = {}
@@ -20,7 +23,7 @@ navigator.mediaDevices.getUserMedia({
   
 
   socket.on('user-connected', userId => {
-
+    // updatePeople()
     connectToNewUser(userId, stream)
   })
 
@@ -40,26 +43,26 @@ navigator.mediaDevices.getUserMedia({
   })
 })
 let name_input=$("#username");
-$('html').keydown(function (e) {
-  if (e.which == 13) {
-    if(name_input.val().trim().length !== 0){
 
-      username=name_input.val().trim();
-      if(username.length>27){
-        username=username.slice(0,27)
-      }
-      console.log(username);
-      addUserName(username)
-      EnterMeet()
-    }
-    else{
-      addUserName(username)
-      EnterMeet()
-    }
-
-  }
+function newUserAdd(){
   
-});
+      if(name_input.val().trim().length !== 0){
+
+          username=name_input.val().trim();
+          if(username.length>27){
+            username=username.slice(0,27)
+          }
+          console.log(username);
+          addUserName(username)
+          EnterMeet()
+      }
+      else{
+          addUserName(username)
+          EnterMeet()
+      }
+
+    
+}
 function addUserName(username){
   console.log("username received at script.js",username);
   socket.emit('add-Username',username)
@@ -116,6 +119,12 @@ function connectToNewUser(userId, stream) {
 
   peers[userId] = call
 }
+
+function updatePeople(username){
+    people.push(username)
+    peopleCount++;
+}
+
 function scrollVideos(number){
   // console.log("length",document.querySelector("video"))
   // document.querySelector("video").style.width="50%"
