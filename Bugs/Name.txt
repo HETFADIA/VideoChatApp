@@ -1,0 +1,3 @@
+Different names appear in each users
+Reason: socket emit instead of io
+Soln: fixed using both socket and io

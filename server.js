@@ -41,10 +41,11 @@ io.on('connection', socket => {
             console.log("hi")
             try{
                 let currRoomId=socket.roomId;
-                console.log(usersdict)
-                // let indexa=usersdict[currRoomId].indexOf(socket.username);
-                // usersdict[currRoomId].splice(indexa, 1);
-                // console.log("user leaving",socket.username)
+                console.log(usersdict,currRoomId,socket.username)
+                console.log("line 45",usersdict.get(currRoomId))
+                let indexa=usersdict.get(currRoomId).indexOf(socket.username);
+                usersdict.get(currRoomId).splice(indexa, 1);
+                console.log("user leaving name is",socket.username)
             }
             catch(e){
                 console.log(e,"did someone leave???")
@@ -68,7 +69,7 @@ io.on('connection', socket => {
         usersdict.set(roomId, users);
         console.log(usersdict)
         console.log("line 70",users)
-        // io.to(roomId).emit('userlist',users);
+        io.to(roomId).emit('userlist',users);
         socket.emit("userlist",users)
         console.log("line 72")
     })
