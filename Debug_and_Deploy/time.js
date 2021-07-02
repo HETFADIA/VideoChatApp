@@ -8,15 +8,12 @@ function currentTime(){
         hrs-=12
         delay=" PM"
     }
-    // else if(hrs==12 && min==0){
-    //     delay=" Noon"
-    // }
-    // else if(hrs==12){
-    //     delay=" PM"
-    // }
-    // else if(hrs==0){
-    //     hrs=12;
-    // }
+    else if(hrs==0){
+      hrs=12;
+    }
+    else if(hrs==12){
+        dealy=" PM"
+    }
     if(hrs<10){
         hrs='0'+hrs;
     }
