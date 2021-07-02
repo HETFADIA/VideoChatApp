@@ -53,6 +53,8 @@ io.on('connection', socket => {
             io.to(roomId).emit('userlist',users);
             socket.emit("userlist",users)
             socket.to(roomId).emit('user-disconnected', (userId,socket.username))
+            io.to(roomId).emit("userAddRem",username,0)
+            socket.emit("userAddRem",username,0)
         })
 
     })
@@ -73,7 +75,8 @@ io.on('connection', socket => {
         console.log("line 70",users)
         io.to(roomId).emit('userlist',users);
         socket.emit("userlist",users)
-        console.log("line 72")
+        io.to(roomId).emit("userAddRem",username,1)
+        socket.emit("userAddRem",username,1)
     })
 })
 

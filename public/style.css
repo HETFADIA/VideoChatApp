@@ -14,6 +14,7 @@ body {
 
 .main__right {
   flex: 0.2;
+  overflow-y:auto;
 }
 
 .main__videos {
@@ -96,6 +97,7 @@ body {
 .messages {
   color: black;
   list-style: none;
+  overflow-y: auto;
 }
 
 .main__message_container {

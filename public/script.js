@@ -36,8 +36,19 @@ navigator.mediaDevices.getUserMedia({
     socket.on("createMessage", (message,username) => {
         var currTime=currentTime();
         console.log(currTime)
-        $("ul").append(`<li class="message"><b>${username}</b> ${currTime}<br/>${message}</li>`);
+        var string=`<span class="message"><b>${username}</b> ${currTime}<br/>${message}</span><br><br>`
+        $("ul").append(string);
         scrollToBottom()
+    })
+    socket.on("userAddRem",(username,joined)=>{
+        var string="";
+        if(joined){
+            string=`<i>${username} joined</i><br><br>`
+        }
+        else{
+            string=`<i>${username} left</i><br><br>`
+        }
+        $("ul").append(string);
     })
 })
 let name_input=$("#username");
