@@ -117,9 +117,12 @@ function connectToNewUser(userId, stream) {
   peers[userId] = call
 }
 function scrollVideos(number){
-
+  // console.log("length",document.querySelector("video"))
+  // document.querySelector("video").style.width="50%"
+  // document.querySelector("video").style.height="50%"
   if(number>4){
     document.getElementsByClassName("main__videos")[0].style.overflowY="scroll";
+
   }
   else{
     document.getElementsByClassName("main__videos")[0].style.overflowY="hidden";
