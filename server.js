@@ -50,6 +50,8 @@ io.on('connection', socket => {
             catch(e){
                 console.log(e,"did someone leave???")
             }
+            io.to(roomId).emit('userlist',users);
+            socket.emit("userlist",users)
             socket.to(roomId).emit('user-disconnected', (userId,socket.username))
         })
 
