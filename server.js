@@ -21,34 +21,56 @@ app.get('/:room', (req, res) => {
 var users=[];
 var usersdict=new Map()
 io.on('connection', socket => {
-    socket.on('join-room', (roomId, userId) => {
+    
+    socket.on('join-room', (roomId, userId,username) => {
+        socket.roomId=roomId;
+        console.log("line 27",socket.roomId)
+        socket.userId=userId
+        socket.username=username;
+        console.log("socket username",socket.username)
         socket.join(roomId)
-        socket.to(roomId).emit('user-connected', userId);
+        socket.to(roomId).emit('user-connected', userId,username);
         
         socket.on('message', (message,username) => {
             io.to(roomId).emit('createMessage', message,username)
         }); 
 
-        socket.on('add-Username',username=>{
-            console.log("reached to server.js",username)
-            if(usersdict.has(roomId)){
-                console.log("old user")
-                users=usersdict.get(roomId)
-                users.push(username)
-            }
-            else{
-                console.log("new user");
-                users=[username]
-            }
-            usersdict.set(roomId, users);
-            console.log(users)
-            io.to(roomId).emit('userlist',users);
-        })
+        
 
         socket.on('disconnect', () => {
-            socket.to(roomId).emit('user-disconnected', userId)
+            console.log("hi")
+            try{
+                let currRoomId=socket.roomId;
+                console.log(usersdict)
+                // let indexa=usersdict[currRoomId].indexOf(socket.username);
+                // usersdict[currRoomId].splice(indexa, 1);
+                // console.log("user leaving",socket.username)
+            }
+            catch(e){
+                console.log(e,"did someone leave???")
+            }
+            socket.to(roomId).emit('user-disconnected', (userId,socket.username))
         })
 
+    })
+    socket.on('add-Username',(username,roomId)=>{
+        console.log("reached to server.js",username)
+        console.log("socket room id line 58",roomId)
+        if(usersdict.has(roomId)){
+            console.log("old user")
+            users=usersdict.get(roomId)
+            users.push(username)
+        }
+        else{
+            console.log("new user");
+            users=[username]
+        }
+        usersdict.set(roomId, users);
+        console.log(usersdict)
+        console.log("line 70",users)
+        // io.to(roomId).emit('userlist',users);
+        socket.emit("userlist",users)
+        console.log("line 72")
     })
 })
 

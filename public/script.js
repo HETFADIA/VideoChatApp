@@ -1,4 +1,5 @@
 let username="Anon"
+id=0
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 let usersCount=0
@@ -22,8 +23,12 @@ navigator.mediaDevices.getUserMedia({
     addVideoStream(myVideo, stream)
   
 
-    socket.on('user-connected', userId => {
+    socket.on('user-connected', (userId,newusername) => {
         // updatePeople()
+        var conn = myPeer.connect(userId);
+        conn.on('open', function(){
+            conn.send(username);
+        });
         connectToNewUser(userId, stream)
     })
 
@@ -53,6 +58,8 @@ function newUserAdd(){
           addUserName(username)
           EnterMeet()
       }
+      console.log("myPeer id username",id,username)
+      socket.emit('join-room', ROOM_ID, id,username)
 }
 
 let text = $("#chat_message");
@@ -65,8 +72,9 @@ $('#chat_message').keydown(function (e) {
 });
 
 function addUserName(username){
-    console.log("username received at script.js",username);
-    socket.emit('add-Username',username)
+    console.log("username received at script.js line 75",username);
+    console.log("room id at line 76",ROOM_ID)
+    socket.emit('add-Username',username,ROOM_ID)
 }
 
 var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -82,12 +90,12 @@ myPeer.on('call', function(call){
     })
 })
 
-socket.on('user-disconnected', userId => {
-
+socket.on('user-disconnected', (userId,username) => {
+    console.log("user-disconnected",username)
     if (peers[userId]) peers[userId].close()
 })
 socket.on('userlist',users=>{
-    console.log("userlist reached script",users);
+    console.log("userlist reached script line 97",users);
     var string=""
     var spaces=""
     var spacestimes=6;
@@ -100,8 +108,8 @@ socket.on('userlist',users=>{
     console.log(string)
     document.getElementById("userlist").innerHTML=string;
 })
-myPeer.on('open', id => {
-    socket.emit('join-room', ROOM_ID, id)
+myPeer.on('open', ID => {
+    id = ID
 })
 
 function connectToNewUser(userId, stream) {
