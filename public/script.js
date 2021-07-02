@@ -171,7 +171,7 @@ const playStop = () => {
 
 const setMuteButton = () => {
   const html = `
-    <i class="fas fa-microphone"></i>
+    <i class="fas fa-headset"></i>
     <span>Mute</span>
   `
   document.querySelector('.main__mute_button').innerHTML = html;
@@ -179,7 +179,7 @@ const setMuteButton = () => {
 
 const setUnmuteButton = () => {
   const html = `
-    <i class="unmute fas fa-microphone-slash"></i>
+    <i class="unmute fas fa-headset"></i>
     <span>Unmute</span>
   `
   document.querySelector('.main__mute_button').innerHTML = html;
