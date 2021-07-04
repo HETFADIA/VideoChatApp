@@ -21,7 +21,8 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
     myVideoStream = stream;
     addVideoStream(myVideo, stream,id)
-  
+    myVideoStream.getAudioTracks()[0].enabled=0;
+    myVideoStream.getVideoTracks()[0].enabled=0;
 
     socket.on('user-connected', (userId,newusername) => {
         // updatePeople()
@@ -97,19 +98,6 @@ function addUserName(username){
     console.log("room id at line 76",ROOM_ID)
     socket.emit('add-Username',username,ROOM_ID)
 }
-
-// var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-// myPeer.on('call', function(call){
-//     getUserMedia({video: true, audio: true}, function(stream){
-//         call.answer(stream);
-//         const video = document.createElement('video');
-//         call.on('stream', function(remoteStream){
-//           addVideoStream(video, remoteStream,call.peer);
-//         })
-//     },function(err){
-//         console.log('Failed to get local stream' ,err);
-//     })
-// })
 
 socket.on('user-disconnected', (userId,username) => {
     console.log("user-disconnected",username)
