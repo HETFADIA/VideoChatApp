@@ -1,5 +1,5 @@
 let username="Anon"
-id=0
+let id
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 let usersCount=0
@@ -20,7 +20,7 @@ navigator.mediaDevices.getUserMedia({
     audio: true
 }).then(stream => {
     myVideoStream = stream;
-    addVideoStream(myVideo, stream)
+    addVideoStream(myVideo, stream,id)
   
 
     socket.on('user-connected', (userId,newusername) => {
@@ -50,6 +50,15 @@ navigator.mediaDevices.getUserMedia({
         }
         $("ul").append(string);
         scrollToBottom()
+    })
+    myPeer.on('call', function(call){
+        
+            call.answer(stream);
+            const video = document.createElement('video');
+            call.on('stream', function(remoteStream){
+              addVideoStream(video, remoteStream,call.peer);
+            })
+        
     })
 })
 let name_input=$("#username");
@@ -89,18 +98,18 @@ function addUserName(username){
     socket.emit('add-Username',username,ROOM_ID)
 }
 
-var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-myPeer.on('call', function(call){
-    getUserMedia({video: true, audio: true}, function(stream){
-        call.answer(stream);
-        const video = document.createElement('video');
-        call.on('stream', function(remoteStream){
-          addVideoStream(video, remoteStream);
-        })
-    },function(err){
-        console.log('Failed to get local stream' ,err);
-    })
-})
+// var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+// myPeer.on('call', function(call){
+//     getUserMedia({video: true, audio: true}, function(stream){
+//         call.answer(stream);
+//         const video = document.createElement('video');
+//         call.on('stream', function(remoteStream){
+//           addVideoStream(video, remoteStream,call.peer);
+//         })
+//     },function(err){
+//         console.log('Failed to get local stream' ,err);
+//     })
+// })
 
 socket.on('user-disconnected', (userId,username) => {
     console.log("user-disconnected",username)
@@ -130,7 +139,7 @@ function connectToNewUser(userId, stream) {
     
     call.on('stream', userVideoStream => {
 
-        addVideoStream(video, userVideoStream)
+        addVideoStream(video, userVideoStream,userId)
     })
     call.on('close', () => {
 
@@ -156,12 +165,13 @@ function scrollVideos(number){
       document.getElementsByClassName("main__videos")[0].style.overflowY="hidden";
     }
 }
-function addVideoStream(video, stream) {
+function addVideoStream(video, stream,user_id) {
     video.srcObject = stream
     video.addEventListener('loadedmetadata', () => {
       video.play()
     })
-    
+    console.log("id")
+    video.id=user_id;
     videoGrid.append(video)
     usersCount=document.getElementById("video-grid").childElementCount;
     scrollVideos(usersCount);
