@@ -49,6 +49,7 @@ navigator.mediaDevices.getUserMedia({
             string=`<i>${username} left</i><br><br>`
         }
         $("ul").append(string);
+        scrollToBottom()
     })
 })
 let name_input=$("#username");
