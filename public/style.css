@@ -163,3 +163,12 @@ video {
 #copyURL {
   display: none;
 }
+.people{
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+right-padding{
+  padding-right: 10px;
+  margin-right: auto;
+}

@@ -37,7 +37,7 @@ navigator.mediaDevices.getUserMedia({
     socket.on("createMessage", (message,username) => {
         var currTime=currentTime();
         console.log(currTime)
-        var string=`<span class="message"><b>${username}</b> ${currTime}<br/>${message}</span><br><br>`
+        var string=`<span class="message right-padding"><b>${username}</b> ${currTime}<br/>${message}</span><br><br>`
         $("ul").append(string);
         scrollToBottom()
     })
@@ -105,7 +105,7 @@ socket.on('userlist',users=>{
     
     
     for(var i=0;i<users.length;i++){
-        string+=users[i]+"</br>"+"<br>";
+        string+="<span class='people'>"+users[i]+"</span>"+"</br>"+"<br>";
     }
     console.log(string)
     document.getElementById("userlist").innerHTML=string;
