@@ -14,7 +14,7 @@ body {
 
 .main__right {
   flex: 0.2;
-  overflow-y:auto;
+  overflow-y: auto;
 }
 
 .main__videos {
@@ -41,7 +41,6 @@ body {
   background-color: rgb(54, 47, 47);
   display: flex;
   justify-content: space-evenly;
-  
 }
 
 .main__controls__block {
@@ -93,11 +92,14 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  word-wrap: break-word;
+
 }
 .messages {
   color: black;
   list-style: none;
   overflow-y: auto;
+  word-wrap: break-word;
 }
 
 .main__message_container {

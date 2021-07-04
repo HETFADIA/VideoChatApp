@@ -53,13 +53,12 @@ navigator.mediaDevices.getUserMedia({
         scrollToBottom()
     })
     myPeer.on('call', function(call){
-        
             call.answer(stream);
             const video = document.createElement('video');
+            peers[call.peer]=call;
             call.on('stream', function(remoteStream){
               addVideoStream(video, remoteStream,call.peer);
             })
-        
     })
 })
 let name_input=$("#username");
@@ -69,10 +68,7 @@ function newUserAdd(){
       if(name_input.val().trim().length !== 0){
 
           username=name_input.val().trim();
-          if(username.length>27){
-            username=username.slice(0,27)
-          }
-          console.log(username);
+          
           addUserName(username)
           EnterMeet()
       }
@@ -106,13 +102,10 @@ socket.on('user-disconnected', (userId,username) => {
 socket.on('userlist',users=>{
     console.log("userlist reached script line 97",users);
     var string=""
-    var spaces=""
-    var spacestimes=6;
-    for(var i=0;i<spacestimes;i++){
-        spaces+="&nbsp;"
-    }
+    
+    
     for(var i=0;i<users.length;i++){
-        string+=spaces+users[i]+"</br>"+"<br>";
+        string+=users[i]+"</br>"+"<br>";
     }
     console.log(string)
     document.getElementById("userlist").innerHTML=string;
@@ -160,6 +153,8 @@ function addVideoStream(video, stream,user_id) {
     })
     console.log("id")
     video.id=user_id;
+    
+
     videoGrid.append(video)
     usersCount=document.getElementById("video-grid").childElementCount;
     scrollVideos(usersCount);
