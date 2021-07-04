@@ -172,3 +172,7 @@ right-padding{
   padding-right: 10px;
   margin-right: auto;
 }
+.adjust{
+  padding: 12px 10px;
+  background-color: rgb(255, 255, 248);
+}
