@@ -8,7 +8,7 @@ let peopleCount=0
 const myPeer = new Peer(undefined, {
     host: '/',
     path: '/peerjs',
-    port: '3030' //443 for deploy 3030 for local
+    port: '443' //443 for deploy 3030 for local
 })
 let myVideoStream;
 let conn;
