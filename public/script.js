@@ -313,3 +313,27 @@ function copyURL(){
     copyToClipboard(window.location.href)
 
 }
+function list(a){var res=[];for(let i of a){res.push(i)};return res}
+Emoji=list("🌼🌺🌸😂🤩😭😡👍🙂🤗🤯🔥🥳🥺👿🤭🎉😓😤🤝😖😑😅🎂🤮😵😿🤢🤔🙊😇😀🙊🙉🙈")
+function random(a,b){
+    let minimum=a;
+    let difference=b-a;
+    return Math.floor(minimum+Math.random()*difference);
+}
+function randomChoise(a){
+    var randomIndex=random(0,a.length)
+    
+    if(randomIndex>=a.length){
+        console.log("list index out of range")
+        randomIndex=a.length-1;
+    }
+    console.log(randomIndex,a[randomIndex])
+    return a[randomIndex]
+}
+function showEmoji(){
+
+    var string=`<span class="message right-padding">${randomChoise(Emoji)}</span><br><br>`
+    
+    $("ul").append(string);
+    scrollToBottom()
+}
