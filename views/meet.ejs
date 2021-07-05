@@ -64,14 +64,18 @@
                   <div class="main__controls__button" onclick="showUsers()">
                      <i class="fas fa-users"></i>
                      <span>Participants</span>
+                     
                   </div>
                   <div class="main__controls__button"  onclick="hidechat()">
                      <i class="fas fa-comment-alt"></i>
                      <span>Msgs</span>
                   </div>
-                  <div class="main__controls__button" onclick="copyURL()">
+                  <div class="main__controls__button" id="copy-link" onclick="copyURL()">
                      <i class="fas fa-copy"></i>
-                     <span>Copy Link</span>
+                     <span>
+                        Copy Link
+                        <!-- <span class="popuptext" id="myPopup">Link Copied</span> -->
+                     </span>
                   </div>
                   <div class="main__controls__button"  onclick="endmeet()">
                      <i class="fas fa-phone-slash red-color"></i>
@@ -83,10 +87,10 @@
          <div class="main__right chat-window" id="main_right">
             
             <div class="main__header white-background black-color padding-bottom">
-               <span class="heading" id="heading">Chat</span>
-               <span id="right-align">
-
-                  <i class="fas fa-times" onclick="hidechat()"></i>
+               <span class="heading" id="heading">In-Call Messages</span>
+               <span class="right-align">
+                  <i class="far fa-times-circle fa-lg" onclick="hidechat()"></i>
+                  <!-- <i class="fas fa-times fa-lg" onclick="hidechat()"></i> -->
                </span>
                <hr>
             </div>
@@ -105,6 +109,10 @@
          <div class="users" id="users">
             <div class="veryBigText" style="text-align:center">
                People
+               <span class="right-align">
+                  <i class="far fa-times-circle fa-lg" onclick="showUsers()"></i>
+                  <!-- <i class="fas fa-times fa-lg" onclick="showUsers()"></i> -->
+               </span>
                <hr>
             </div>
             <br>

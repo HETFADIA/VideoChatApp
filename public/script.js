@@ -316,6 +316,8 @@ const copyToClipboard = str => {
 function copyURL(){
     console.log(window.location.href,"successfully copied")
     copyToClipboard(window.location.href)
+    var popup = document.getElementById("copy-link");
+    popup.classList.toggle("show");
 }
 const updatecolor=(string)=>{
     document.getElementById(string).style.color="blue";
@@ -356,3 +358,7 @@ function endmeet(){
 function myFunction(){
     hidechat()
 }
+// function myFunction() {
+//     var popup = document.getElementById("copy-link");
+//     popup.classList.toggle("show");
+// }
