@@ -176,3 +176,18 @@ right-padding{
   padding: 12px 10px;
   background-color: rgb(255, 255, 248);
 }
+#right-align{
+  float: right;
+  
+}
+.heading{
+  font-size:large;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  text-decoration: underline;
+}
+padding-bottom{
+  padding-bottom:15px;
+}
