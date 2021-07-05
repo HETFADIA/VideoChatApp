@@ -323,7 +323,14 @@ const beautify=(string)=>{
     updatefont(string);
 }
 function list(a){var res=[];for(let i of a){res.push(i)};return res}
-Emoji=list("🌼🌺🌸😂🤩😭😡👍🙂🤗🤯🔥🥳🥺👿🤭🎉😓😤🤝😖😑😅🎂🤮😵😿🤢🤔🙊😇😀🙊🙉🙈")
+function set(a){var res=new Set();for(let i of a){res.add(i)};return res}
+function getEmojis(){
+    var string="🌼🌺🌸😂🤩😭😡👍🙂🤗🤯🔥🥳🥺👿🤭🎉😓😤🤝😖😑😅🎂🤮😵😿🤢🤔🙊😇😀🙊🙉🙈"
+    string+="👿😳😮😘😚😗😙😽😍"
+    console.log(string)
+    return list(set(string))
+}
+Emoji=getEmojis()
 function random(a,b){
     let minimum=a;
     let difference=b-a;
@@ -331,19 +338,10 @@ function random(a,b){
 }
 function randomChoise(a){
     var randomIndex=random(0,a.length)
-    
-    if(randomIndex>=a.length){
-        console.log("list index out of range")
-        randomIndex=a.length-1;
-    }
     console.log(randomIndex,a[randomIndex])
     return a[randomIndex]
 }
 function showEmoji(){
-
-    var string=`<span class="messages right-padding">${randomChoise(Emoji)}</span><br><br>`
-
-    $("#messages").append(string);
-
-    scrollToBottom()
+    var string=randomChoise(Emoji)
+    socket.emit('message', string,username);
 }
