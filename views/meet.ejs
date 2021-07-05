@@ -47,16 +47,17 @@
             </div>
             <div class="main__controls">
                <div class="main__controls__block">
+                  <div onclick="playStop()" class="main__controls__button main__video_button" >
+                     <i class="stop fas fa-video-slash"></i>
+                     <span>Play Video</span>
+                  </div>
                   <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
                      <i class="unmute fas fa-headset"></i>
                      
                      <span>Unmute</span>
                   </div>
                
-                  <div onclick="playStop()" class="main__controls__button main__video_button" >
-                     <i class="stop fas fa-video-slash"></i>
-                     <span>Play Video</span>
-                  </div>
+                  
                
                   
                
@@ -86,6 +87,7 @@
 
                   <i class="fas fa-times" onclick="hidechat()"></i>
                </span>
+               <hr>
             </div>
             <div class="main__chat_window" id="main_chat">
                <ul class="messages" id="messages">
