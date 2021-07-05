@@ -37,8 +37,8 @@ navigator.mediaDevices.getUserMedia({
     socket.on("createMessage", (message,username) => {
         var currTime=currentTime();
         console.log(currTime)
-        var string=`<span class="message right-padding"><b>${username}</b> ${currTime}<br/>${message}</span><br><br>`
-        $("ul").append(string);
+        var string=`<span class="messages right-padding"><b>${username}</b> ${currTime}<br/>${message}</span><br><br>`
+        $("#messages").append(string);
         scrollToBottom()
     })
     socket.on("userAddRem",(username,joined)=>{
@@ -49,7 +49,7 @@ navigator.mediaDevices.getUserMedia({
         else{
             string=`<i>${username} left</i><br><br>`
         }
-        $("ul").append(string);
+        $("#messages").append(string);
         scrollToBottom()
     })
     myPeer.on('call', function(call){
@@ -311,7 +311,16 @@ const copyToClipboard = str => {
 function copyURL(){
     console.log(window.location.href,"successfully copied")
     copyToClipboard(window.location.href)
-
+}
+const updatecolor=(string)=>{
+    document.getElementById(string).style.color="blue";
+}
+const updatefont=(string)=>{
+    document.getElementById(string).style.fontFamily="verdana";
+}
+const beautify=(string)=>{
+    updatecolor(string);
+    updatefont(string);
 }
 function list(a){var res=[];for(let i of a){res.push(i)};return res}
 Emoji=list("🌼🌺🌸😂🤩😭😡👍🙂🤗🤯🔥🥳🥺👿🤭🎉😓😤🤝😖😑😅🎂🤮😵😿🤢🤔🙊😇😀🙊🙉🙈")
@@ -332,8 +341,9 @@ function randomChoise(a){
 }
 function showEmoji(){
 
-    var string=`<span class="message right-padding">${randomChoise(Emoji)}</span><br><br>`
-    
-    $("ul").append(string);
+    var string=`<span class="messages right-padding">${randomChoise(Emoji)}</span><br><br>`
+
+    $("#messages").append(string);
+
     scrollToBottom()
 }
