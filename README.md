@@ -1,4 +1,6 @@
 # clone
 npm run dev
-# Deployed(443)
+# Deployed
 https://floating-island-62731.herokuapp.com/
+
+Works only for laptop
