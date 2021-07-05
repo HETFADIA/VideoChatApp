@@ -17,7 +17,7 @@
    <script src="script.js" defer></script>
    
 </head>
-<body>
+<body onload="myFunction()">
    <span id="login">
       <span id="login-name">
          <h1>
@@ -73,8 +73,9 @@
                      <i class="fas fa-copy"></i>
                      <span>Copy Link</span>
                   </div>
-                  <div class="main__controls__button">
-                     <span class="leave_meeting" onclick="endmeet()">Leave Meeting</span>
+                  <div class="main__controls__button"  onclick="endmeet()">
+                     <i class="fas fa-phone-slash red-color"></i>
+                     <span class="leave_meeting">End Call</span>
                   </div>
                </div>
             </div>
@@ -97,7 +98,7 @@
             </div>
             <div class="main__message_container white-background black-color">
                <!-- <i class="fas fa-meh-blank adjust"></i> -->
-               <i class="far fa-meh-blank adjust" onclick="showEmoji()"></i>
+               <i class="far fa-meh-blank adjust" onclick="showEmoji()" title="Send Random Emoji"></i>
                <input id="chat_message" type="text" placeholder="Send Messages..." style="color:black">
             </div>
          </div>

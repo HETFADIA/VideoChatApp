@@ -353,3 +353,6 @@ function showEmoji(){
 function endmeet(){
     window.location.href = `/${ROOM_ID}/bye`;
 }
+function myFunction(){
+    hidechat()
+}
