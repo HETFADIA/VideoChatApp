@@ -94,10 +94,15 @@ function addUserName(username){
     console.log("room id at line 76",ROOM_ID)
     socket.emit('add-Username',username,ROOM_ID)
 }
-
+function removeVideo(videoId){
+    console.log("video id to be rem",videoId)
+    $(`#${videoId}`).remove();
+}
 socket.on('user-disconnected', (userId,username) => {
     console.log("user-disconnected",username)
+    removeVideo(userId)
     if (peers[userId]) peers[userId].close()
+
 })
 socket.on('userlist',users=>{
     console.log("userlist reached script line 97",users);
@@ -344,4 +349,7 @@ function randomChoise(a){
 function showEmoji(){
     var string=randomChoise(Emoji)
     socket.emit('message', string,username);
+}
+function endmeet(){
+    window.location.href = `/${ROOM_ID}/bye`;
 }

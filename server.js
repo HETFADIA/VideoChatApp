@@ -18,6 +18,11 @@ app.get('/:meet', (req, res) => {
     res.render('meet', { roomId: req.params.meet })
 })
 
+app.get('/:room/bye',(req,res)=>{
+    res.render('bye')
+})
+
+
 var users=[];
 var usersdict=new Map()
 io.on('connection', socket => {
@@ -46,15 +51,19 @@ io.on('connection', socket => {
                 let indexa=usersdict.get(currRoomId).indexOf(socket.username);
                 usersdict.get(currRoomId).splice(indexa, 1);
                 console.log("user leaving name is",socket.username)
+
             }
             catch(e){
                 console.log(e,"did someone leave???")
             }
             io.to(roomId).emit('userlist',users);
             socket.emit("userlist",users)
-            socket.to(roomId).emit('user-disconnected', (userId,socket.username))
+            console.log("line 61",socket.userId,socket.username)
+            socket.to(roomId).emit('user-disconnected', socket.userId,socket.username)
             io.to(roomId).emit("userAddRem",username,0)
             socket.emit("userAddRem",username,0)
+
+
         })
 
     })
