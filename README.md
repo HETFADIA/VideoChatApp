@@ -1,9 +1,7 @@
-# clone
-npm run dev
 # Deployed
 https://floating-island-62731.herokuapp.com/
 
-Works only for laptop
+
 
 
 
@@ -20,3 +18,10 @@ Works only for laptop
    ```sh
    npm run dev
    ```
+
+3. Open in browser and type
+   ```sh
+   http://localhost:443/
+   ```
+### Warnings
+Works only for laptop
