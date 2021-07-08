@@ -22,17 +22,24 @@
       <span id="login-name">
          <h1>
             Welcome to Meet
-         </h1>
+      </h1>
       </span>
       
-      <br>
+      
       <span id="name">
-         <span id="bigText" class="bigText">
-            Enter your name
-         </span>
-         
-         <input id="username" type="text" name="name" value="" placeholder="Name" onKeyDown="if(event.keyCode==13) newUserAdd();">
+         <!-- <span id="bigText" class="bigText">
+            Username
+         </span> -->
+         <br>
+         <input id="username" type="text" name="name" value="" placeholder="Name" onKeyDown="if(event.keyCode==13) newUserAdd();" size="40px">
       </span>
+      <br>
+      <br>
+
+      <button class="btn" onclick="newUserAdd();"> Join meet</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <button class="btn"  onclick="newUserAdd();"> Join Anonymous</button>
       
    </span>
    
