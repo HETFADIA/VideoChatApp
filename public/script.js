@@ -306,7 +306,9 @@ function showUsers(){
     }
 }
 
-
+function shareScreen(){
+    
+}
 
 const copyToClipboard = str => {
     //https://www.30secondsofcode.org/articles/s/copy-text-to-clipboard-with-javascript

@@ -49,7 +49,9 @@
          <div class="main__left" id="main__left">
             <div class="main__videos">
                <div id="video-grid">
-                  
+                     <video class="screen-share" id="screen-share">
+
+                     </video>
                </div>
             </div>
             <div class="main__controls">
@@ -71,6 +73,11 @@
                   <div class="main__controls__button" onclick="showUsers()">
                      <i class="fas fa-users"></i>
                      <span>Participants</span>
+                     
+                  </div>
+                  <div class="main__controls__button" onclick="shareScreen()">
+                     <i class="fas fa-share"></i>
+                     <span>Screen Share</span>
                      
                   </div>
                   <div class="main__controls__button"  onclick="hidechat()">
@@ -108,7 +115,7 @@
                
             </div>
             <div class="main__message_container white-background black-color">
-               <!-- <i class="fas fa-meh-blank adjust"></i> -->
+               
                <i class="far fa-meh-blank adjust" onclick="showEmoji()" title="Send Random Emoji"></i>
                <input id="chat_message" type="text" placeholder="Send Messages..." style="color:black">
             </div>
@@ -118,7 +125,7 @@
                People
                <span class="right-align">
                   <i class="far fa-times-circle fa-lg" onclick="showUsers()"></i>
-                  <!-- <i class="fas fa-times fa-lg" onclick="showUsers()"></i> -->
+                  
                </span>
                <hr>
             </div>
