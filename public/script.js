@@ -1,4 +1,7 @@
 let username="Anon"
+if(sessionStorage.getItem('username')!=null){
+    username=sessionStorage.getItem('username');
+}
 let id
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
@@ -76,6 +79,7 @@ function newUserAdd(){
           addUserName(username)
           EnterMeet()
       }
+      sessionStorage.setItem('username',username)
       console.log("myPeer id username",id,username)
       socket.emit('join-room', ROOM_ID, id,username)
 }
