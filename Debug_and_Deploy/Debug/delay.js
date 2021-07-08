@@ -10,3 +10,6 @@ function fun(b){
 var variable=setInterval(fun,1000,b)
 
 
+
+
+

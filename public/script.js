@@ -363,8 +363,25 @@ function endmeet(){
 }
 function myFunction(){
     hidechat()
+    document.getElementById('copytext').style.display="none"
 }
 // function myFunction() {
 //     var popup = document.getElementById("copy-link");
 //     popup.classList.toggle("show");
 // }
+var variable;
+a=0
+function EmptyFunction(){
+    if(a<2){
+        console.log(a)
+        a++;return;
+    }
+    clearInterval(variable)
+    document.getElementById("copytext").style.display = "none";
+}
+function openForm() {
+
+    document.getElementById("copytext").style.display = "block";
+    variable=setInterval(EmptyFunction,1000)
+    
+  }

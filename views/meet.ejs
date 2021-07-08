@@ -49,9 +49,9 @@
          <div class="main__left" id="main__left">
             <div class="main__videos">
                <div id="video-grid">
-                     <video class="screen-share" id="screen-share">
+                     <!-- <video class="screen-share" id="screen-share">
 
-                     </video>
+                     </video> -->
                </div>
             </div>
             <div class="main__controls">
@@ -75,20 +75,20 @@
                      <span>Participants</span>
                      
                   </div>
-                  <div class="main__controls__button" onclick="shareScreen()">
+                  <!-- <div class="main__controls__button" onclick="shareScreen()">
                      <i class="fas fa-share"></i>
                      <span>Screen Share</span>
                      
-                  </div>
+                  </div> -->
                   <div class="main__controls__button"  onclick="hidechat()">
                      <i class="fas fa-comment-alt"></i>
                      <span>Msgs</span>
                   </div>
-                  <div class="main__controls__button" id="copy-link" onclick="copyURL()">
+                  <div class="main__controls__button" id="copy-link" onclick="copyURL(); openForm()">
                      <i class="fas fa-copy"></i>
                      <span>
                         Copy Link
-                        <!-- <span class="popuptext" id="myPopup">Link Copied</span> -->
+                        <span id="copytext">Copied Link</span>
                      </span>
                   </div>
                   <div class="main__controls__button"  onclick="endmeet()">
