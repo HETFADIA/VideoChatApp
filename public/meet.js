@@ -88,20 +88,19 @@ let name_input=$("#username");
 
 function newUserAdd(){
   
-      if(name_input.val().trim().length !== 0){
-
-          username=name_input.val().trim();
-          
-          addUserName(username)
-          EnterMeet()
+      if(name_input.val().trim().length === 0){
+        document.getElementById("nullLength").innerHTML="Please Enter Name"
+        return;
       }
-      else{
-          addUserName(username)
-          EnterMeet()
-      }
-      sessionStorage.setItem('username',username)
-      console.log("myPeer id username",id,username)
-      socket.emit('join-room', ROOM_ID, id,username)
+        username=name_input.val().trim();
+        
+        addUserName(username)
+        EnterMeet()
+      
+      
+        sessionStorage.setItem('username',username)
+        console.log("myPeer id username",id,username)
+        socket.emit('join-room', ROOM_ID, id,username)
 }
 
 let text = $("#chat_message");
