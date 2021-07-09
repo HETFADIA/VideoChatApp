@@ -8,6 +8,10 @@ const videoGrid = document.getElementById('video-grid')
 let usersCount=0
 let people=[]
 let peopleCount=0
+let screenShared=0
+let shareTracker=0;
+let shareScreenUserId=-1;
+let endCallTracker = {};
 const myPeer = new Peer(undefined, {
     host: '/',
     path: '/peerjs',
@@ -56,11 +60,27 @@ navigator.mediaDevices.getUserMedia({
         scrollToBottom()
     })
     myPeer.on('call', function(call){
-            call.answer(stream);
+            console.log(call.peer + ' called');
+            ShareTracker = 0;
+            //answering a call and sending them our stream
+            if(endCallTracker[call.peer]){
+                ShareTracker = 1;
+            }
+            if(ShareTracker === 0){
+                endCallTracker[call.peer] = call;
+                call.answer(stream);
+            }
+            else{
+                call.answer()
+            }
+            
             const video = document.createElement('video');
             peers[call.peer]=call;
             call.on('stream', function(remoteStream){
-              addVideoStream(video, remoteStream,call.peer);
+                if(shareTracker==0){
+
+                    addVideoStream(video, remoteStream,call.peer);
+                }
             })
     })
 })
@@ -365,10 +385,7 @@ function myFunction(){
     hidechat()
     document.getElementById('copytext').style.display="none"
 }
-// function myFunction() {
-//     var popup = document.getElementById("copy-link");
-//     popup.classList.toggle("show");
-// }
+
 var variable;
 
 function EmptyFunction(){
