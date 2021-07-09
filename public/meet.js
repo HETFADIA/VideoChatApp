@@ -379,6 +379,6 @@ function EmptyFunction(){
 function openForm() {
     
     document.getElementById("copytext").style.display = "block";
-    variable=setInterval(EmptyFunction,3000)
+    variable=setInterval(EmptyFunction,100)
     
   }
