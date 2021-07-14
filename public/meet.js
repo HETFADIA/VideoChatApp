@@ -5,6 +5,7 @@ if(sessionStorage.getItem('username')!=null){
 let id
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
+const screenelement=document.getElementById('screen-share')
 let usersCount=0
 let people=[]
 let peopleCount=0
