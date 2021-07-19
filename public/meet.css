@@ -10,6 +10,8 @@ body {
   flex: 0.8;
   display: flex;
   flex-direction: column;
+  /* margin-top: 40px; */
+  /* padding-top:40px; */
 }
 
 .main__right {
@@ -132,10 +134,17 @@ body {
   overflow-y: auto;
 }
 video {
+  /* margin-top: 100px; */
   height: 300px;
   width: 400px;
   object-fit: cover;
   padding: 8px;
+}
+#screen-share {
+  /* 900,1600 * 0.6 */
+  margin-top: 180px;
+  height: 540px;
+  width: 960px;
 }
 #login {
   width: 400px;
@@ -223,7 +232,6 @@ hr {
 
 /* The actual popup */
 .popup .popuptext {
-  
   visibility: hidden;
   width: 160px;
   background-color: #555;
@@ -336,7 +344,8 @@ hr {
 }
 
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type="text"],
+.form-container input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -345,20 +354,21 @@ hr {
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -368,9 +378,10 @@ hr {
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.form-container .btn:hover,
+.open-button:hover {
   opacity: 1;
 }
-#screen-share{
+#screen-share {
   display: none;
 }

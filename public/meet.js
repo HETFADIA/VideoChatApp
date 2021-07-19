@@ -5,14 +5,14 @@ if(sessionStorage.getItem('username')!=null){
 let id
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-const screenelement=document.getElementById('screen-share')
+const ScreenCaptureElement=document.getElementById('screen-share')
 let usersCount=0
 let people=[]
 let peopleCount=0
 let screenShared=0
 let shareTracker=0;
 let shareScreenUserId=-1;
-let endCallTracker = {};
+
 const myPeer = new Peer(undefined, {
     host: '/',
     path: '/peerjs',
@@ -64,14 +64,15 @@ navigator.mediaDevices.getUserMedia({
             console.log(call.peer + ' called');
             ShareTracker = 0;
             //answering a call and sending them our stream
-            if(endCallTracker[call.peer]){
+            if(peers[call.peer]){
                 ShareTracker = 1;
             }
             if(ShareTracker === 0){
-                endCallTracker[call.peer] = call;
+                peers[call.peer] = call;
                 call.answer(stream);
             }
             else{
+                //one way
                 call.answer()
             }
             
@@ -79,12 +80,20 @@ navigator.mediaDevices.getUserMedia({
             peers[call.peer]=call;
             call.on('stream', function(remoteStream){
                 if(shareTracker==0){
-
                     addVideoStream(video, remoteStream,call.peer);
+                }
+                else{
+                    injectScreenIntoField(ScreenCaptureElement, remoteStream,call.peer);
                 }
             })
     })
 })
+let shareScreenUserID = -1;
+const injectScreenIntoField = (videoElement, ScreenShareStream, ShareUserPeerID) => {
+    videoElement.srcObject = ScreenShareStream;
+    videoElement.style.display = 'flex';
+    shareScreenUserID = ShareUserPeerID;
+}
 let name_input=$("#username");
 
 function newUserAdd(){
@@ -103,7 +112,12 @@ function newUserAdd(){
         console.log("myPeer id username",id,username)
         socket.emit('join-room', ROOM_ID, id,username)
 }
-
+var displayMediaObject = {
+    video: {
+      cursor: "always"
+    },
+    audio: false
+};
 let text = $("#chat_message");
 
 $('#chat_message').keydown(function (e) {
@@ -112,7 +126,46 @@ $('#chat_message').keydown(function (e) {
         text.val('')
     }
 });
+isScreenBeingShared=false;
+$('#screenShare').on('click', async () => {
+    
+    
+    if(!isScreenBeingShared){
+        CapturedStream = await captureScreenMedia();
+        isScreenBeingShared = true;
+        
+        
+        ScreenCaptureElement.style.display = 'flex';
+        
 
+        CapturedStream.getVideoTracks()[0].onended = () => {
+            console.log('stop screen capture');
+            ScreenCaptureElement.style.display = 'none';
+            isScreenBeingShared = false;
+            // socket.emit('share-screen-end');
+            
+        };
+    }
+    else{
+        // socket.emit('share-screen-end');
+        stopScreenMediaCapture();
+        isScreenBeingShared = false;
+        
+    }
+})
+const  captureScreenMedia = async () => {
+    console.log('screen capture begins');
+    let saveTheStream =  await navigator.mediaDevices.getDisplayMedia(displayMediaObject);
+    ScreenCaptureElement.srcObject = saveTheStream;
+    return saveTheStream;
+}
+
+const stopScreenMediaCapture = async () => {
+    let tracks = ScreenCaptureElement.srcObject.getTracks();
+    tracks.forEach(track => track.stop());
+    ScreenCaptureElement.srcObject = null;
+    ScreenCaptureElement.style.display = 'none';
+}
 function addUserName(username){
     console.log("username received at script.js line 75",username);
     console.log("room id at line 76",ROOM_ID)
@@ -167,7 +220,8 @@ function updatePeople(username){
 }
 
 function scrollVideos(number){
-    if(number>4){
+    // if(number>4){
+    if(number){
       document.getElementsByClassName("main__videos")[0].style.overflowY="scroll";
 
     }
