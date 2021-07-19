@@ -62,12 +62,12 @@ navigator.mediaDevices.getUserMedia({
     })
     myPeer.on('call', function(call){
             console.log(call.peer + ' called');
-            ShareTracker = 0;
+            shareTracker = 0;
             //answering a call and sending them our stream
             if(peers[call.peer]){
-                ShareTracker = 1;
+                shareTracker = 1;
             }
-            if(ShareTracker === 0){
+            if(shareTracker === 0){
                 peers[call.peer] = call;
                 call.answer(stream);
             }
@@ -77,18 +77,20 @@ navigator.mediaDevices.getUserMedia({
             }
             
             const video = document.createElement('video');
-            peers[call.peer]=call;
+            
+            console.log("sharetracker",shareTracker)
             call.on('stream', function(remoteStream){
                 if(shareTracker==0){
                     addVideoStream(video, remoteStream,call.peer);
                 }
                 else{
+                    
                     injectScreenIntoField(ScreenCaptureElement, remoteStream,call.peer);
                 }
             })
     })
 })
-let shareScreenUserID = -1;
+
 const injectScreenIntoField = (videoElement, ScreenShareStream, ShareUserPeerID) => {
     videoElement.srcObject = ScreenShareStream;
     videoElement.style.display = 'flex';
@@ -133,25 +135,35 @@ $('#screenShare').on('click', async () => {
     if(!isScreenBeingShared){
         CapturedStream = await captureScreenMedia();
         isScreenBeingShared = true;
-        
-        
+        let UserIDList = Object.keys(peers);
+        for(let i = 0; i < UserIDList.length; i++){
+            myPeer.call(UserIDList[i], CapturedStream);
+        }
         ScreenCaptureElement.style.display = 'flex';
         
 
         CapturedStream.getVideoTracks()[0].onended = () => {
+            
             console.log('stop screen capture');
             ScreenCaptureElement.style.display = 'none';
             isScreenBeingShared = false;
-            // socket.emit('share-screen-end');
+            console.log("150")
+            socket.emit('share-screen-end');
             
         };
     }
     else{
-        // socket.emit('share-screen-end');
+        console.log("156")
+        socket.emit('share-screen-end');
         stopScreenMediaCapture();
         isScreenBeingShared = false;
         
     }
+})
+socket.on('update-screen-share-status', () => {
+    stopScreenMediaCapture();
+    shareScreenUserID = -1;
+    console.log('executed')
 })
 const  captureScreenMedia = async () => {
     console.log('screen capture begins');
@@ -179,7 +191,10 @@ socket.on('user-disconnected', (userId,username) => {
     console.log("user-disconnected",username)
     removeVideo(userId)
     if (peers[userId]) peers[userId].close()
-
+    if(shareScreenUserID === userId){
+        stopScreenMediaCapture();
+        shareScreenUserID = -1;
+    }
 })
 socket.on('userlist',users=>{
     console.log("userlist reached script line 97",users);
@@ -240,7 +255,11 @@ function addVideoStream(video, stream,user_id) {
 
     videoGrid.append(video)
     usersCount=document.getElementById("video-grid").childElementCount;
+    if(isScreenBeingShared){
+        myPeer.call(user_id, CapturedStream);
+    }
     scrollVideos(usersCount);
+    
 }
 
 

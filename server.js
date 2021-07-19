@@ -67,6 +67,11 @@ io.on('connection', socket => {
         })
 
     })
+    socket.on('share-screen-end',() => {
+        console.log("71")
+        socket.to(socket.roomId).emit('update-screen-share-status');
+        console.log("73")
+    })
     socket.on('add-Username',(username,roomId)=>{
         console.log("reached to server.js",username)
         console.log("socket room id line 58",roomId)
