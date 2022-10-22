@@ -23,5 +23,9 @@ https://hetfadia.herokuapp.com/
    ```sh
    http://localhost:443/
    ```
-### Warnings
-Works only for laptop
+### About the app
+   ```sh
+    An application for online meetings Github
+    App allows users to connect, chat, and share their screen and video with each other.
+    Peer.js and socket.io libraries to manage real-time communication between users.
+   ```
